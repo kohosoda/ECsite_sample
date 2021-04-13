@@ -27,11 +27,11 @@ Route::delete('/cartitem/{cartItem}', 'CartItemController@destroy');
 Route::post('/solditem', 'SoldItemController@store');
 
 // マイページ
-Route::get('/mypage', 'Usercontroller@show')->name('users.show');
-Route::post('/mypage', 'Usercontroller@store')->name('users.store');
+Route::get('/mypage', 'UserController@show')->name('users.show');
+Route::post('/mypage', 'UserController@store')->name('users.store');
 
-Route::get('/mypage/history', 'Usercontroller@history')->name('users.history');
-Route::get('/mypage/like', 'Usercontroller@like')->name('users.like');
+Route::get('/mypage/history', 'UserController@history')->name('users.history');
+Route::get('/mypage/like', 'UserController@like')->name('users.like');
 
 //認証用ルート
 Auth::routes(); 

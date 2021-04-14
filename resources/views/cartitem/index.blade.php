@@ -26,7 +26,8 @@
           </div>
           <div class="form-inline">
             <!-- 数量を更新するフォームに変更 -->
-            <form method="POST" action="/cartitem/{{ $cartItem->id }}">
+            {{-- <form method="POST" action="/cartitem/{{ $cartItem->id }}"> --}}
+            <form method="POST" action="{{ route('cart.update', ['cartItem' => $cartItem->id]) }}">
               @method('PUT')
               @csrf
               <input type="text" class="form-control" name="quantity" value="{{ $cartItem->quantity }}">
@@ -34,7 +35,7 @@
               <button type="submit" class="btn btn-primary">更新</button>
             </form>
             <!-- 削除フォームを追加 -->
-            <form method="POST" action="/cartitem/{{ $cartItem->id }}">
+            <form method="POST" action="{{ route('cart.destroy', ['cartItem' => $cartItem->id]) }}">
               @method('DELETE')
               @csrf
               <button type="submit" class="btn btn-primary ml-1">カートから削除する</button>
@@ -52,13 +53,10 @@
         <div class="card-body">
           {{ $subtotal }} 円
         </div>
-        <form method="POST" action="/solditem" class="form-group">
+        <form method="POST" action="{{ route('soldItem.store') }}" class="form-group">
           @csrf
           @foreach($cartItems as $cartItem)
             <input type="hidden" name="cartItems" value="{{ $cartItems }}">
-            {{-- <input type="hidden" name="cartItems[item_id][]" value="{{ $cartItem->item_id }}">
-            <input type="hidden" name="cartItems[quantity][]" value="{{ $cartItem->quantity }}">
-            <input type="hidden" name="cartItems[price][]" value="{{ $cartItem->price }}"> --}}
           @endforeach
           <button class="btn btn-primary" type="submit">購入を決定</button>
         </form>

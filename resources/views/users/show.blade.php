@@ -6,9 +6,9 @@
 @include('nav')
 
 {{-- 登録情報を更新した場合のメッセージ --}}
-@if(isset($flash_message))
+@if(Session::has('flash_message'))
 <div class="alert alert-success">
-  {{ $flash_message }}
+  {{ session('flash_message') }}
 </div>
 @endif
 

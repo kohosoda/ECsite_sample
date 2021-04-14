@@ -28,7 +28,7 @@
           &yen; {{ $item->price }}
         </div>
         <div class="card-body">
-          <form class="form-group row" method="POST" action="/cartitem">
+          <form class="form-group row" method="POST" action="{{ route('cart.store') }}">
             @csrf
             <div class="col-sm-4 col-form-label">
               <label for="quantity">数量：</label>

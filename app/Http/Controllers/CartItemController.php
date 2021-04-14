@@ -22,7 +22,7 @@ class CartItemController extends Controller
             $subtotal += $cartItem->price * $cartItem->quantity;
         }
 
-        return view('/cartitem/index', ['cartItems' => $cartItems, 'subtotal' => $subtotal]);
+        return view('cartitem.index', ['cartItems' => $cartItems, 'subtotal' => $subtotal]);
     }
 
 
@@ -38,14 +38,14 @@ class CartItemController extends Controller
             ]
         );
 
-        return redirect('/')->with('flash_message', 'カートに商品を追加しました');
+        return redirect()->view('item.index')->with('flash_message', 'カートに商品を追加しました');
     }
 
     public function destroy(CartItem $cartItem)
     {
         $cartItem->delete();
 
-        return redirect('/cartitem')->with('flash_message', 'カートから削除しました');
+        return redirect()->view('cartitem.index')->with('flash_message', 'カートから削除しました');
     }
 
     public function update(Request $request, CartItem $cartItem)
@@ -53,6 +53,6 @@ class CartItemController extends Controller
         $cartItem->quantity = $request->post('quantity');
         $cartItem->save();
         
-        return redirect('/cartitem')->with('flash_message', 'カートを更新しました');
+        return redirect()->view('cartitem.index')->with('flash_message', 'カートを更新しました');
     }
 }

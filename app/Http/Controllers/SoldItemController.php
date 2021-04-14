@@ -28,6 +28,6 @@ class SoldItemController extends Controller
         $user_id = $request->user()->id;
         CartItem::where('user_id', $user_id)->delete();
         
-        return redirect('/cartitem')->with('flash_message', '購入を完了しました');
+        return redirect()->view('cartitem.index')->with('flash_message', '購入を完了しました');
     }
 }

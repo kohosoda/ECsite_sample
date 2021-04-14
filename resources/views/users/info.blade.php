@@ -6,7 +6,7 @@
         ご登録情報
       </div>
       <div class="card-body">
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('mypage.store') }}">
           @csrf
           <div class="form-group">
 

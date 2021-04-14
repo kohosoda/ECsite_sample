@@ -28,7 +28,7 @@
       </a>
 
       <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-        <button class="dropdown-item" type="button" onclick="location.href='/mypage'">
+        <button class="dropdown-item" type="button" onclick="location.href='{{ route('mypage.show') }}'">
           マイページ
         </button>
 

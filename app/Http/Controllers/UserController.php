@@ -55,7 +55,7 @@ class UserController extends Controller
             $user = User::find(Auth::id());
             $user->fill($request->all())->save();
             
-            return view('users.show', ['user' => $user, 'flash_message' => '登録情報を更新しました']);
+            return redirect()->view('users.show', ['user' => $user])->with('flash_message', '登録情報を更新しました');
         }
     }
 }

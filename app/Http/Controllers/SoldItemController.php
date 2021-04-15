@@ -13,11 +13,12 @@ class SoldItemController extends Controller
         // dd($request->cartItems);
         // dd(json_decode($request->cartItems));
         $cartItems = json_decode($request->cartItems); //JSON形式からオブジェクトに変換
-        foreach ($cartItems as $cartItem){
+        foreach ($cartItems as $cartItem) {
             // dd(gettype($cartItem));
             $soldItem = new SoldItem;
             $soldItem->fill((array)$cartItem)->save();
-            
+
+
             // $soldItem->user_id = $user_id;
             // $soldItem->item_id = $cartItem->item_id;
             // $soldItem->quantity = $cartItem->quantity;
@@ -27,7 +28,7 @@ class SoldItemController extends Controller
         // カートの中身をリセット
         $user_id = $request->user()->id;
         CartItem::where('user_id', $user_id)->delete();
-        
-        return redirect()->view('cartitem.index')->with('flash_message', '購入を完了しました');
+
+        return redirect()->route('cart.index')->with('flash_message', '購入を完了しました');
     }
 }

@@ -20,17 +20,13 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $items = $user->soldItems->map(function ($soldItem) {
-            return $soldItem->item;
-        });
-        
-        // $soldItems = $user->soldItems;
-        // foreach($soldItems as $soldItem){
-        //     $items[] = $soldItem->item;
-        // }
-        // dd($soldItems, $items);
+        // sold_itemsテーブルとitemsテーブルを結合して、ユーザーの購入履歴を取得する。
+        $soldItems = SoldItem::select('sold_items.*', 'items.name', 'items.price', 'items.src')
+            ->where('user_id', $user->id)
+            ->join('items', 'items.id','=','sold_items.item_id')
+            ->get();
 
-        return view('users.history', ['items' => $items, 'user' => $user]);
+        return view('users.history', ['soldItems' => $soldItems, 'user' => $user]);
     }
 
     public function like()

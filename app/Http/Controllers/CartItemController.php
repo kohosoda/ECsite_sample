@@ -12,11 +12,13 @@ class CartItemController extends Controller
 {
     public function index()
     {
+        // cart_itemsテーブルとitemsテーブルを結合して、カート画面表示に必要なデータを取得する。
         $cartItems = CartItem::select('cart_items.*', 'items.name', 'items.price')
             ->where('user_id', AUth::id())
             ->join('items', 'items.id','=','cart_items.item_id')
             ->get();
 
+        // 小計を計算する
         $subtotal = 0;
         foreach($cartItems as $cartItem){
             $subtotal += $cartItem->price * $cartItem->quantity;
@@ -28,6 +30,7 @@ class CartItemController extends Controller
 
     public function store(Request $request, Item $item)
     {
+        // カートの中身を更新する。
         CartItem::updateOrCreate(
             [
                 'user_id' => Auth::id(),
